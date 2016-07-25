@@ -31,14 +31,23 @@ plt.show()
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
 
+from sklearn.cross_validation import cross_val_score
+from sklearn.metrics import accuracy_score
+from sklearn.ensemble import AdaBoostClassifier
 
-
-
+clf = AdaBoostClassifier(n_estimators=5)
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+print accuracy_score(pred, labels_test)
+print clf.score(features_test, labels_test)
+scores = cross_val_score(clf, features_test, labels_test)
+print scores.mean()     
 
 
 
 
 try:
     prettyPicture(clf, features_test, labels_test)
+    plt.show()
 except NameError:
     pass
